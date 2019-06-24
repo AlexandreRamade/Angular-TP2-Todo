@@ -1,0 +1,7 @@
+<div>
+  <app-todo-form 
+    (newTodoEvent)="handleNewTodoEvent($event)"
+    (resetTodosList)="handleRessetTodoEvent($event)"></app-todo-form>
+  <app-todo-list [todos] = "todos"
+    (changeCheckboxEvent)="handleChangeCheckboxEvent($event)"></app-todo-list>
+</div>

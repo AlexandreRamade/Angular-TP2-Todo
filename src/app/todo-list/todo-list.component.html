@@ -1,0 +1,11 @@
+<div [ngSwitch]="todos.length">
+  <p *ngSwitchCase="0" class="bold txtBlue">Vous n'avez aucun Todo.</p>
+  <p *ngSwitchCase="1" class="bold txtBlue">Vous avez 1 Todo à gérer :</p>
+  <p *ngSwitchDefault class="bold txtBlue">Vous avez {{todos.length}} Todos à gérer :</p>
+</div>
+
+<ul>
+  <li *ngFor="let todo of todos">
+    <app-todo-item [todo]=todo (changeCheckboxEvent)=handleChangeCheckboxEvent($event) #todoItem></app-todo-item>
+  </li>
+</ul>

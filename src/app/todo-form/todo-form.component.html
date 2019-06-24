@@ -1,0 +1,8 @@
+<div>
+  <fieldset>
+    <legend>Créer un nouveau Todo</legend>
+    <input type="text" name="title" id="title" placeholder="Titre" required (change)=handleChangeTitleInput($event)/>
+    <button (click)=creerNewTodoOnClick($event)>Créer</button>
+    <button (click)=ressetTodoListOnClick($event)>Resset</button>
+  </fieldset>
+</div>

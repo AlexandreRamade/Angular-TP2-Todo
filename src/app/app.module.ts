@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
@@ -8,6 +9,7 @@ import { TodoContainerComponent } from './todo-container/todo-container.componen
 import { TodoFormComponent } from './todo-form/todo-form.component';
 import { InTitleCasePipe } from './in-title-case.pipe';
 import { HighlightDirective } from './highlight.directive';
+import { HeaderInterceptor } from './service/HeaderInterceptor';
 
 @NgModule({
   declarations: [
@@ -20,9 +22,12 @@ import { HighlightDirective } from './highlight.directive';
     HighlightDirective
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

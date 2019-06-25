@@ -30,7 +30,6 @@ export class TodoListComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    setTimeout(() => this.todoItem.handleTodoCheck(), 7000);
   }
 
 }

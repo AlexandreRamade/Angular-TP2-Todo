@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../model/Todo';
 import * as _ from 'lodash';
+import TodoServices from '../service/TodoServices';
 
 
 @Component({
@@ -12,25 +13,27 @@ export class TodoContainerComponent implements OnInit {
 
   todos:Array<Todo> = [];
 
-  constructor() { }
+  constructor(private todoServices:TodoServices) { }
 
   ngOnInit() {
+    this.findAllTodos();
+  }
+
+  findAllTodos():void{
+    this.todoServices.findAllTodos().then(result =>this.todos = result);
+  }
+
+  handleNewTodoEvent(title):void {
+    this.todoServices.createTodo(title).then(result => this.todos = result);
+  }
+
+  handleChangeCheckboxEvent(todo) {
+    this.todoServices.updateTodo(todo).then(result => this.todos = result);
 
   }
 
-  handleChangeCheckboxEvent(event) {
-    let oldTodo:Todo = _.find(this.todos, (t => t.id === event.id));
-    let newTodos:Array<Todo> = _.without(this.todos, oldTodo);
-    this.todos = [...newTodos, {...oldTodo, isDone: !oldTodo.isDone}].sort((t1, t2) => t1.id-t2.id);
-
-  }
-
-  handleNewTodoEvent(event):void {
-    this.todos = [...this.todos, new Todo(this.todos.length + 1, event, false)];
-  }
-
-  handleRessetTodoEvent(eevent):void {
-    this.todos = [];
+  handleRessetTodoEvent(event):void {
+    this.todoServices.resetAllTodos().then(result => this.todos = result);
   }
 
 

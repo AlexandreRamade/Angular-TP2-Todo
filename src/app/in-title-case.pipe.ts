@@ -18,7 +18,7 @@ export class InTitleCasePipe implements PipeTransform {
   transform(value: string): string {
     let words:Array<String> = _.split(value, ' ');
     let txt:string = '';
-    for(let word:string of words) {
+    for(let word of words) {
       txt += _.upperFirst(word) + ' ';
     }
     return txt;
